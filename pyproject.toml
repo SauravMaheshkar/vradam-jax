@@ -1,0 +1,35 @@
+[project]
+name = "vradam-jax"
+version = "0.0.1"
+description = "VRAdam (velocity-regularized Adam) for optax"
+requires-python = ">=3.11"
+dependencies = [
+    "jax>=0.10.2",
+    "jaxtyping>=0.3.11",
+    "optax>=0.2.8",
+]
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "chex>=0.1.92",
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+    "ty>=0.0.94",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "C4", "NPY", "RUF"]
+# jaxtyping shape strings like "batch seq" are not forward references.
+ignore = ["F722"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = ["--import-mode=importlib", "-q"]
